@@ -20,11 +20,11 @@
     "https://api.anthropic.com/*"
   ],
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "src/app/background.js",
     "type": "module"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "src/app/options.html",
     "open_in_tab": true
   },
   "content_scripts": [{
@@ -38,5 +38,12 @@
       "48": "assets/icons/icon_48.png",
       "128": "assets/icons/icon_128.png"
     }
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": [
+      "src/app/*",
+      "assets/icons/*"
+    ],
+    "matches": ["https://github.com/*"]
+  }]
 }
