@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alfred Settings</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      color: #24292f;
+      line-height: 1.5;
+      background-color: #f6f8fa;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      padding: 2rem;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #d0d7de;
+    }
+
+    .header img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #24292f;
+    }
+
+    .version {
+      margin-left: auto;
+      color: #57606a;
+      font-size: 0.875rem;
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #fff;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #24292f;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #24292f;
+    }
+
+    .form-group .hint {
+      display: block;
+      margin-top: 0.25rem;
+      color: #57606a;
+      font-size: 0.875rem;
+    }
+
+    input[type="password"],
+    textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d0d7de;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-family: inherit;
+      background-color: #fff;
+    }
+
+    textarea {
+      height: 200px;
+      resize: vertical;
+      font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    }
+
+    input[type="password"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #0969da;
+      box-shadow: 0 0 0 3px rgba(9,105,218,0.3);
+    }
+
+    button {
+      background-color: #2da44e;
+      color: #fff;
+      border: 1px solid rgba(27,31,36,0.15);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2c974b;
+    }
+
+    button:active {
+      background-color: #298e46;
+    }
+
+    .save-success {
+      display: none;
+      background-color: #dafbe1;
+      color: #116329;
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      color: #57606a;
+      font-size: 0.875rem;
+    }
+
+    footer a {
+      color: #0969da;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+
+      .container {
+        background-color: #161b22;
+      }
+
+      .header {
+        border-bottom-color: #30363d;
+      }
+
+      .header h1 {
+        color: #c9d1d9;
+      }
+
+      .section {
+        background-color: #161b22;
+        border-color: #30363d;
+      }
+
+      .section h2,
+      .form-group label {
+        color: #c9d1d9;
+      }
+
+      input[type="password"],
+      textarea {
+        background-color: #0d1117;
+        border-color: #30363d;
+        color: #c9d1d9;
+      }
+
+      input[type="password"]:focus,
+      textarea:focus {
+        border-color: #1f6feb;
+        box-shadow: 0 0 0 3px rgba(56,139,253,0.3);
+      }
+
+      .save-success {
+        background-color: rgba(46,160,67,0.15);
+        color: #3fb950;
+      }
+
+      footer {
+        color: #8b949e;
+      }
+
+      footer a {
+        color: #58a6ff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="assets/icons/icon_128.png" alt="Alfred logo">
+      <h1>Alfred Settings</h1>
+      <span class="version">v0.1.0</span>
+    </div>
+
+    <div id="saveSuccess" class="save-success">
+      🎩 Settings saved successfully!
+    </div>
+
+    <div class="section">
+      <h2>API Configuration</h2>
+      <div class="form-group">
+        <label for="apiKey">Claude API Key</label>
+        <input type="password" id="apiKey" placeholder="Enter your Claude API key">
+        <span class="hint">Your Claude API key from Anthropic. This is stored locally and never shared.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>GitHub Configuration</h2>
+      <div class="form-group">
+        <label for="githubToken">GitHub Personal Access Token (Optional)</label>
+        <input type="password" id="githubToken" placeholder="Enter your GitHub token">
+        <span class="hint">Optional: Your GitHub personal access token for accessing private repositories. Only needs 'repo' scope.</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>PR Template</h2>
+      <div class="form-group">
+        <label for="template">Default PR Description Template</label>
+        <textarea id="template" placeholder="## 🎯 What Changed
+
+[Brief summary of the main changes]
+
+## 🔍 Details
+
+### Added
+- 
+
+### Changed
+- 
+
+### Fixed
+- 
+
+## 🧪 Testing Done
+- [ ] Manual testing
+- [ ] Unit tests
+- [ ] Integration tests
+
+## 📝 Notes
+- Any known limitations?
+- Any follow-up tasks?"></textarea>
+        <span class="hint">The template to use when generating PR descriptions. Supports markdown format.</span>
+      </div>
+    </div>
+
+    <button id="save">Save Settings</button>
+  </div>
+
+  <footer>
+    <p>Made with ☕️ by <a href="https://github.com/andemengo" target="_blank">@andemengo</a></p>
+  </footer>
+
+  <script src="options.js"></script>
+</body>
+</html>

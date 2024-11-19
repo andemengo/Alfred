@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Alfred",
+  "version": "0.1.0",
+  "description": "Your faithful butler for GitHub PR descriptions",
+  "icons": {
+    "16": "assets/icons/icon_16.png",
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "background"
+  ],
+  "host_permissions": [
+    "https://github.com/*",
+    "https://api.github.com/*",
+    "https://api.anthropic.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [{
+    "matches": ["https://github.com/*"],
+    "js": ["src/content/content.js"],
+    "css": ["src/content/content.css"]
+  }],
+  "action": {
+    "default_icon": {
+      "16": "assets/icons/icon_16.png",
+      "48": "assets/icons/icon_48.png",
+      "128": "assets/icons/icon_128.png"
+    }
+  }
+}
